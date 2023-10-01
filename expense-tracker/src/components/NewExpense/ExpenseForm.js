@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-function ExpenseForm() {
+function ExpenseForm(props) {
   const [addTitle, setAddTitle] = useState(""); // useState is a react hook
   const [addSpend, setAddSpend] = useState(""); // useState is a react hook
   const [addDate, setAddDate] = useState(""); // useState is a react hook
@@ -41,7 +41,7 @@ function ExpenseForm() {
       spend: addSpend,
       date: new Date(addDate),
     };
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
     setAddTitle("");
     setAddSpend("");
     setAddDate("");
