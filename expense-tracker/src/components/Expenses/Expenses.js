@@ -8,6 +8,17 @@ function Expense(props) {
   
   const [filteredYear, setFilteredYear] = useState('2023');
 
+  let filterInfoText = "2024 and 2025";
+  if(filteredYear === '2023') {
+    filterInfoText = "2024 and 2025";
+  } else if(filteredYear === '2024') {
+    filterInfoText = "2023 and 2025";
+  } else if(filteredYear === '2025') {
+    filterInfoText = "2023 and 2024";
+  } else {
+    filterInfoText = "2023, 2024 and 2025";
+  }
+
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   }
@@ -16,26 +27,14 @@ function Expense(props) {
     <div>
     <Card className="expenses">
         <ExpensesFilter onSelected={filteredYear} onFilter={filterChangeHandler}/>
-        <ExpenseItem
-        title={props.items[0].title}
-        spend={props.items[0].spend}
-        date={props.items[0].date}
-      />
-      <ExpenseItem
-        title={props.items[1].title}
-        spend={props.items[1].spend}
-        date={props.items[1].date}
-      />
-      <ExpenseItem
-        title={props.items[2].title}
-        spend={props.items[2].spend}
-        date={props.items[2].date}
-      />
-      <ExpenseItem
-        title={props.items[3].title}
-        spend={props.items[3].spend}
-        date={props.items[3].date}
-      />
+        <p>Date for years {filterInfoText} is hidden.</p>
+        {props.items.map((expense) => (
+          <ExpenseItem
+            title={expense.title}
+            spend={expense.spend}
+            date={expense.date}
+          />
+            ))}
     </Card>
     </div>
   )
